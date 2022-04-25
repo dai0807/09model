@@ -45,20 +45,20 @@
 			
 			
 			
-			$(".Depth04:contains('판매상품등록')").on("click",function(){
+			$(".Depth03:contains('판매상품등록')").on("click",function(){
 				
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/addProduct") ;
 				
 			});
 			
 			
-			$(".Depth04:contains('판매상품관리')").on("click",function(){
+			$(".Depth03:contains('판매상품관리')").on("click",function(){
 				
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=manage") ;
 				
 			});			
 			
-			$(".Depth04:contains('판매상품목록')").on("click",function(){
+			$(".Depth03:contains('판매상품목록')").on("click",function(){
 				
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listSale") ;
 				
@@ -70,7 +70,7 @@
 				
 			});				
 			
-			$(".Depth05:contains('구매이력조회')").on("click",function(){
+			$(".Depth03:contains('구매이력조회')").on("click",function(){
 				
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listPurchase") ;
 				
@@ -126,28 +126,25 @@
 				<tr>
 					<td class="DepthEnd">&nbsp;</td>
 				</tr>
-		</table>
-	</td>
-</tr>
-
-<!--menu 02 line-->
+				
+				<!--menu 02 line-->
 <c:if test="${user.role == 'admin'}">
 	<tr>
 		<td valign="top"> 
 			<table  border="0" cellspacing="0" cellpadding="0" width="159">
 				<tr>
-					<td class="Depth04">
+					<td class="Depth03">
 						 판매상품등록
 					</td>
 				</tr>
 				<tr>
-					<td class="Depth04">
+					<td class="Depth03">
 						 판매상품관리 
 					</td>
 				</tr>
 				
 				<tr>
-					<td class="Depth04">
+					<td class="Depth03">
 						 판매상품목록  
 					</td>
 				</tr>
@@ -161,13 +158,18 @@
 		</td>
 	</tr>
 </c:if>
+		</table>
+	</td>
+</tr>
+
+
 
 <!--menu 03 line-->
 <tr>
 	<td valign="top"> 
 		<table  border="0" cellspacing="0" cellpadding="0" width="159">
 			<tr>
-				<td id="search">
+				<td class="Depth03" id="search">
 					 상품 검색 
 				</td>
 			</tr>
@@ -175,18 +177,22 @@
 			<c:if test="${ !empty user && user.role == 'user'}">
 			
 			<tr>
-				<td class="Depth05">
+				<td class="Depth03">
 						구매이력조회
 				</td>
 			</tr>
 			
 			</c:if>
+		
+		
+		
+		
 			
 			<tr>
 				<td class="DepthEnd">&nbsp;</td>
 			</tr>
 			<tr>
-				<td id="history">최근 본 상품 </td>
+				<td class="Depth03" id="history">최근 본 상품 </td>
 			</tr>
 		</table>
 	</td>

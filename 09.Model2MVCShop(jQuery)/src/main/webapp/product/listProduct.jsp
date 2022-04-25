@@ -42,7 +42,7 @@
 		
 		//ct_list_pop
 		
-		$(function(){
+		$(function(){ 
 			
 			$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 			$("h7").css("color" , "red");
@@ -81,22 +81,22 @@
 			});
 			
 			// 돌아간다 신ㄴ
-		$.(".tranCode:contains('구매완료')").on("click", function(){
-			var jprodNo = $(.ct_list_pop td:nth-child(3)).attr("value1") ;
+		$(".tranCode:contains('구매완료')").on("click", function(){
+			var jprodNo = $(".ct_list_pop td:nth-child(3)").attr("value1") ;
 			 console.log( "produc_no  ::  " +jprodNo );
 			
 			var currendPage =  $("#currentPage").val(currentPage) ;
 			 console.log( "currentPage  ::  " +currentPage );
 
 			  self.location ="/product/updateProdcutTranCodeByProd?currentPage="+currendPage+"&prodNo="+jprodNo+"&tranCode=003&menu=manage" ;
+			 //여기 부분 보안하기 !! 눈물이 차올라거 고개를 쳐 들었다. 그렇게 눈물이 흘렀다. 
 			 
-			 
 			
-		});
+			});
 			
+		});	 
 			
-			
-		});
+	 
 </script>
 </head>
 <body bgcolor="#ffffff" text="#000000">
