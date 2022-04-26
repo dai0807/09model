@@ -26,21 +26,49 @@ String buyer_id = (String)request.getAttribute("buyer_id") ;
 
 <script type="text/javascript" src="../javascript/calendar.js">
 </script>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
  
-function fnUpdatePurchase() {
-	document.updatePurchase.submit();
-	document.detailForm.action();
-}
- 
+	function fnUpdatePurchase() {
+		//document.updatePurchase.submit();
+		
+		
+		//document.detailForm.action();
+		console.log("${purchase.tranNo}:: " + ${purchase.tranNo} );
+		$("form").attr("method" , "POST").attr("action" , "/purchase/updatePurchase?tranNo=${purchase.tranNo}").submit() ;
+	
+	
+	}
+	
+	$(function(){
+		
+		$(".ct_btn01 :contains('수정')").on('click' , function(){
+			
+			fnUpdatePurchase(); //  fnUpdatePurchase 이거 소환 ! 
+		});
+		
+		
+		$(".ct_btn01 :contains('취소')").on('click' , function(){
+			
+			 history.go(-1) ; 
+		});
+		
+	});
+	
+	
+	 
 </script>
+
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 		<!-- 	<c:set var="tran" value="${param.tranNo}" />  --> 
 
-<form name="updatePurchase" method="post"	action="/purchase/updatePurchase?tranNo=${purchase.tranNo}">
- 			   <input type="hidden" id="buyer_id" name="buyer_id" value="${buyer_id}"/>
+<!-- <form name="updatePurchase" method="post"	action="/purchase/updatePurchase?tranNo=${purchase.tranNo}">  -->
+
+<form name="updatePurchase" >
+
+   <input type="hidden" id="buyer_id" name="buyer_id" value="${buyer_id}"/>
  	
   <table width="600" border="0" cellspacing="0" cellpadding="0"	align="center" style="margin-top: 13px;">
 	<tr>
@@ -70,7 +98,7 @@ function fnUpdatePurchase() {
 		<td class="ct_write01">
 			<select 	name="paymentOption"		class="ct_input_g" 
 							style="width: 100px; height: 19px" maxLength="20">
-							${ purchase.paymentOption}
+							${purchase.paymentOption}
 				<option value="1" ${ purchase.paymentOption == "1" ? "selected" : "" }>현금구매</option> 
 				<option value="2"${ purchase.paymentOption == "2" ? "selected" : "" }>신용구매</option> 
 			</select>
@@ -84,7 +112,7 @@ function fnUpdatePurchase() {
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input type="text" name="receiverName" 	class="ct_input_g" 
-						style="width: 100px; height: 19px" maxLength="20" value="${purchase.receiverName }" />
+						style="width: 100px; height: 19px" maxLength="20" value="${purchase.receiverName}" />
 		</td>
 	</tr>
 	
@@ -96,7 +124,7 @@ function fnUpdatePurchase() {
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverPhone" class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" value=" ${purchase.receiverPhone}" />
+							style="width: 100px; height: 19px" maxLength="20" value="${purchase.receiverPhone}" />
 		</td>
 	</tr>
 	<tr>
@@ -146,12 +174,11 @@ function fnUpdatePurchase() {
 				<td width="17" height="23">
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 				</td>
-			<!-- 	 <td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-					<input type="submit" value="수정"/>
-				</td>	-->
+		 
 				
 				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:fnUpdatePurchase();">수정</a>
+						<!--  <a href="javascript:fnUpdatePurchase();">수정</a> -->
+						수정
 					</td>
 			
 				<td width="14" height="23">
@@ -162,7 +189,8 @@ function fnUpdatePurchase() {
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 				</td>
 				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-					<a href="javascript:history.go(-1)">취소</a>
+					<!--  <a href="javascript:history.go(-1)">취소</a>  -->
+					취소
 				</td>
 				<td width="14" height="23">
 					<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

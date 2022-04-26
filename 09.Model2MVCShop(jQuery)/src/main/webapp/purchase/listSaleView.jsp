@@ -12,20 +12,35 @@
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-<script type="text/javascript">
-// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
-<%-- 자바 스크립트 너무 싫습니다. 당신은 저한테 왜 이런 시련을 주시는 것인 지요
-커런트 페이지 들어오고 , 커런트 페이지 id를 가진 태그에 들어가서 id의 "currentPage"에 value으로 놓기 
-
-
-  --%>
-
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+ 
 
  
 function fncGetList(currentPage){
-	document.getElementById("currentPage").value = currentPage;
-	document.detailForm.submit();
-}
+	//document.getElementById("currentPage").value = currentPage;
+	$("#currentPage").val(currentPage)
+
+	//document.detailForm.submit();
+	$("fomr").attr("method" , "POST").attr("action" , "/purchase/listSale").submit();
+		
+	}
+ 
+ 	$(function(){
+ 		
+ 		//$(".ct_list_pop td:nth-child(3)").on("click", function(){
+ 		//	var jtranCode = $(".ct_list_pop td:nth-child(3)").attr("value") ;
+			//console.log("tranCode" + jtranCode ) ; 
+		$(".tranTd").on("click" , function(){
+			 
+			 var JtranCode = $(this).attr("value") ; 
+ 			 console.log(" attr : tran NO 값은 ? " +JtranCode ) ;
+
+ 
+ 			self.location = "/purchase/getPurchase?tranNo="+JtranCode ; 
+ 		});
+ 		///purchase/getPurchase?tranNo=
+ 	});
  
 </script>
 </head>
@@ -34,7 +49,7 @@ function fncGetList(currentPage){
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/purchase/listSale" method="post">
+<form name="detailForm"  >
  
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -90,13 +105,16 @@ function fncGetList(currentPage){
 							for(int i=0; i<list.size(); i++) {
 					          Purchase purchase = (Purchase)list.get(i) ;
 							 --%>
-			 <tr class="ct_list_pop">
+		 <tr class="ct_list_pop">
 			<td align="center" > ${i}</td>
  		 
  	 			
 			<td></td>
-					<td align="left">
-						<a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">  ${purchase.buyer.userId} </a></td>
+				<td align="left" class="tranTd"  value ="${purchase.tranNo}">
+						${purchase.buyer.userId} 
+				</td>
+						<!-- <a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">   </a> -->
+ 					
 			<td></td>
 				 	<td align="left"> ${purchase.purchaseProd.prodNo }    </td>
 			 <td></td>
