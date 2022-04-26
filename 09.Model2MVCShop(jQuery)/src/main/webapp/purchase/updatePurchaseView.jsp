@@ -2,22 +2,7 @@
     pageEncoding="EUC-KR"%>
     
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%--
-    /////////////////////////////////////////////////
-      <%@ page import="com.model2.mvc.service.domain.Purchase" %>
-    <%@ page import="com.model2.mvc.service.domain.User" %>
-    
-    <%@ page import="com.model2.mvc.common.*" %>
-
-<%
-Purchase purchase = (Purchase)request.getAttribute("purchase") ; 
-String buyer_id = (String)request.getAttribute("buyer_id") ; 
-	System.out.println("getpuchase에 왔나요 ");
-	System.out.println("purchase  " + purchase );
-
-  
-%>
- --%>
+ 
 <html>
 <head>
 <link rel="stylesheet" href="/css/admin.css" type="text/css">

@@ -1,39 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
             <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%--아직하는 중 ㅉ --%>
-    <%-- 
-      <%@ page import="com.model2.mvc.service.domain.Purchase" %>
-       
-    <%@ page import="com.model2.mvc.service.domain.*" %>
-   <%@ page import="java.util.*"  %>  
-    <%@ page import="com.model2.mvc.common.*" %>
-
-    <%
-	Map<String,Object> map=(Map<String,Object>)request.getAttribute("map");
-    List<Purchase> list=(List<Purchase>) map.get("list");
-
-	Search search=(Search)request.getAttribute("search");
-	Page resultPage=(Page)request.getAttribute("resultPage");
-	int currentPage=search.getCurrentPage();
-	String buyer_id = (String)request.getAttribute("buyer_id") ; 
-	
-%>
---%>
-
-<script type="text/javascript">
- <%-- 자바 스크립트 너무 싫습니다. 당신은 저한테 왜 이런 시련을 주시는 것인 지요
-커런트 페이지 들어오고 , 커런트 페이지 id를 가진 태그에 들어가서 id의 "currentPage"에 value으로 놓기 
-
-
-  --%>
-
-
- function fncGetList(currentPage){
-	document.getElementById("currentPage").value = currentPage;
-	document.detailForm.submit();
-}
- </script>
+  
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +12,7 @@
 
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 <script type="text/javascript">
 // 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
@@ -53,12 +23,72 @@
   --%>
 
 
-<!--
+ 
 function fncGetProductList(currentPage){
 	document.getElementById("currentPage").value = currentPage;
 	document.detailForm.submit();
 }
--->
+
+$(function(){
+	
+	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+	$( ".ct_list_pop td:nth-child(7)" ).css("color" , "pink");
+
+	//$("h7").css("color" , "red");
+	
+		$(".ct_list_pop:nth-child(4n+1)" ).css("background-color" , "whitesmoke");
+
+//	$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
+	
+	
+});
+
+$(function(){
+	$(".ct_list_pop td:nth-child(3)").on("click", function(){
+		
+		console.log( "d:nth-child(3) val " +  $(this).val() );
+		console.log( "d:nth-child(3) attr " + $(this).attr("value")  );
+
+		self.location ="/user/getUser?userId="+ $(this).val() ; 
+		 
+		
+	});
+});
+
+$(function(){	
+	$(".ct_list_pop td:nth-child(7)").on("click", function(){
+		
+		console.log("d:nth-child(7) val " +  $(this).val() );
+		console.log("d:nth-child(7) attr" + $(this).attr("value")  );
+
+		self.location ="/purchase/getPurchase?tranNo="+ $(this).attr("value") ; 
+ 
+ 	});
+});
+
+$(function(){	
+	$(".button_arrive").on("click", function(){
+	 
+		console.log(" tranNo 제대로 나온요  " + $(this).attr("value")   );
+		//var currendPage =  $("#currentPage").val() ;
+		 var currendPage =  $("#currentPageH").attr("value") ;
+
+		 console.log( "currentPage  ::  " +currendPage );
+		 
+		 var currendPage1 =  $("#currentPageH").val() ;
+
+		 console.log( "currentPage1  ::  " +currendPage1 );
+
+		
+ 
+		//self.location ="/purchase/updateTranCode?currentPage="+currendPage+"&tranNo="+$(".ct_list_pop td:nth-child(7)").attr("value")+"&tranCode=004"  ; 
+			self.location ="/purchase/updateTranCode?currentPage="+currendPage+"&tranNo="+$(this).attr("value")+"&tranCode=004"  ; 
+
+		
+	});
+	//<a href="${ menu == 'search' ? '/product/getProduct' : '/product/updateProductView'}?prodNo=${product.prodNo }&menu=${ menu }&tranCode=${product.proTranCode}">
+});
+
 </script>
 </head>
 
@@ -89,6 +119,8 @@ function fncGetProductList(currentPage){
 		<tr>
 			<td colspan="12" >
 			전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+ 					<input type="hidden" id="currentPageH"   value="${resultPage.currentPage}"/>
+			
 	</tr>	
 	<tr>
 		<td class="ct_list_b" width="100">No</td>
@@ -123,19 +155,20 @@ function fncGetProductList(currentPage){
 		 
 	 	 <c:set var="i" value="0" /> <!-- 값 세팅 --> 
 		 <c:forEach var="Puchase" items="${list}">
-				<c:set var="i" value="${ i+1 }" />
-			 	<tr class="ct_list_pop">
-			<td align="center" >
-					<a href="/purchase/getPurchase?tranNo=${Puchase.tranNo}">  ${i }</a></td>
+			<c:set var="i" value="${ i+1 }" />
+			 <tr class="ct_list_pop">
+				<td align="center" > ${i } </td>
+				<!--  <a href="/purchase/getPurchase?tranNo=${Puchase.tranNo}">   -->
  
-			<td></td>
-			 <td align="left"> <a href="/user/getUser?userId=${buyer_id}">${buyer_id} </a> </td>
+				<td></td>
+			 <td align="left">${buyer_id}</td>
+		<!-- 	 <td align="left"> <a href="/user/getUser?userId=${buyer_id}">${buyer_id} </a> </td> -->
 	 			
 			
 			<td></td>
 			<td align="left">${Puchase.receiverName }      </td>
  			<td></td>
-			<td align="left">${Puchase.purchaseProd.prodName }      </td>
+			<td align="left" value ="${Puchase.tranNo}" >${Puchase.purchaseProd.prodName }      </td>
 			<td></td>
 			<td align="left"> ${Puchase.receiverPhone}   </td>
 			<td></td>
@@ -146,12 +179,13 @@ function fncGetProductList(currentPage){
 			 
 			 </c:if>
 			   <c:if test="${Puchase.tranCode eq '003'}">
-			 	 배송중상태입니다. 
-			 	  <a href="/purchase/updateTranCode?currentPage=${resultPage.currentPage }&tranNo=${Puchase.tranNo }&tranCode=004">물품도착</a> 
+			 	 배송중 상태입니다. &nbsp;&nbsp;&nbsp;&nbsp;
+			 	 <button  class ="button_arrive"  value ="${Puchase.tranNo}" type="button" > 물품도착 </button>
+			 	 <!--<a href="/purchase/updateTranCode?currentPage=${resultPage.currentPage }&tranNo=${Puchase.tranNo }&tranCode=004"></a>   --> 
 			 
 			 </c:if>
 	 			   <c:if test="${Puchase.tranCode eq '004'}">
-					배송완료 
+					배송완료 상태입니다.
 	 			 </c:if>
 	 
 	 
@@ -186,30 +220,7 @@ function fncGetProductList(currentPage){
 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 		   		<jsp:include page="../common/pageNavigator.jsp"/>	
 		   
-		   <%--
-			<% if( resultPage.getCurrentPage() <= resultPage.getPageUnit() ){ %>
-					◀ 이전
-			<% }else{ %>
-					<a href="javascript:fncGetProductList('<%=resultPage.getCurrentPage()-1%>')">◀ 이전</a>
-			<% } %>
-					
- 
-			<%	for(int i=resultPage.getBeginUnitPage();i<= resultPage.getEndUnitPage() ;i++){	%>
-				
-			 	<a href="javascript:fncGetProductList('<%=i %>');"><%=i %></a> 
-
-
-
-			<% 	}  %> 
-			
-	 
-	
-			<% if( resultPage.getEndUnitPage() >= resultPage.getMaxPage() ){ %>
-					이후 ▶
-			<% }else{ %>
-					<a href="javascript:fncGetProductList('<%=resultPage.getEndUnitPage()+1%>')">이후 ▶</a>
-			<% } %>
- --%>  	
+		    	
     	</td>
 	</tr>
 </table>

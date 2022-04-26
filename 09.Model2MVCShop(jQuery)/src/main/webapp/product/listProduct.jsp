@@ -31,7 +31,7 @@
 			$("#currentPage").val(currentPage)
 			
  			
-			console.log (  "메뉴 값을 출력 하라! 돌아간다 신난다 "+ $("#menu" ).val());
+			console.log (  "메뉴 값을 출력 하라! 돌아간다 신난다 "+ $("#menu" ).val()   + " currentPage " + $("#currentPage").val());
 			//document.detailForm.submit();
 			$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu="+ $("#menu").val()  ).submit();
 		
@@ -82,14 +82,25 @@
 			});
 			
 			// 돌아간다 신ㄴ
-		$(".tranCode:contains('구매완료')").on("click", function(){
-			var jprodNo = $(".ct_list_pop td:nth-child(3)").attr("value1") ;
-			 console.log( "produc_no  ::  " +jprodNo );
+		$("#span_prodNo").on("click", function(){
 			
-			var currendPage =  $("#currentPage").val(currentPage) ;
-			 console.log( "currentPage  ::  " +currentPage );
+			
+			console.log(" tranNo 제대로 나온요  " + $(this).attr("value")   );
+			//var currendPage =  $("#currentPage").val() ;
+			 var currendPage =  $("#currentPageH").attr("value") ;
 
-			  self.location ="/product/updateProdcutTranCodeByProd?currentPage="+currendPage+"&prodNo="+jprodNo+"&tranCode=003&menu=manage" ;
+			 console.log( "currentPage  ::  " +currendPage );
+			 
+
+
+			
+			//var jprodNo = $(".ct_list_pop td:nth-child(3)").attr("value1") ;
+			 //console.log( "produc_no  ::  " +jprodNo );
+			
+//			var currendPage =  $("#currentPage").val(currentPage) ;
+	//		 console.log( "currentPage  ::  " +currendPage );
+
+			  self.location ="/product/updateProdcutTranCodeByProd?currentPage="+currendPage+"&prodNo="+$(this).attr("value")+"&tranCode=003&menu=manage" ;
 			 //여기 부분 보안하기 !! 눈물이 차올라거 고개를 쳐 들었다. 그렇게 눈물이 흘렀다. 
 			 
 			
@@ -187,6 +198,7 @@
 	
 	<%--	<td colspan="11" >전체  <%= total%> 건수, 현재 <%=currentPage %> 페이지</td> --%>
 			전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+				 <input type="hidden" id="currentPageH"   value="${resultPage.currentPage}"/>
 		
 	</tr>
 	<tr>
@@ -244,11 +256,12 @@
 		<td></td>	
 			
 		  <c:if test="${menu eq 'manage'}"> <!--매ㅣ저일때 상태 보이게 하기   -->
-			 	<td align="left" class ="tranCode" value = "${product.proTranCode}">
+			 	<td align="left" class ="tranCode"   value ="${product.prodNo}" >
  				 		
 				<c:if test = "${product.proTranCode eq'002'}">
 				구매완료 &nbsp; &nbsp; 
-						<!--  <a href="/product/updateProdcutTranCodeByProd?currentPage=${resultPage.currentPage}&prodNo=${product.prodNo}&tranCode=003&menu=manage"> --> 배송하기 </a>
+					<span  id ="span_prodNo" value ="${product.prodNo}" > [ 배송하기 ]</span>	
+						 
 				
 				</c:if>
 				<c:if test = "${ product.proTranCode eq '003'}">
@@ -282,24 +295,7 @@
 <tr>
 		<td align="center">
 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
-	<%-- /////////////////////// EL / JSTL 적용으로 주석 처리 //////////////////////// 		   
-	<% if( resultPage.getCurrentPage() <= resultPage.getPageUnit() ){ %>
-			◀ 이전
-	<% }else{ %>
-			<a href="javascript:fncGetUserList('<%=resultPage.getCurrentPage()-1%>')">◀ 이전</a>
-	<% } %>
-
-	<%	for(int i=resultPage.getBeginUnitPage();i<= resultPage.getEndUnitPage() ;i++){	%>
-			<a href="javascript:fncGetUserList('<%=i %>');"><%=i %></a>
-	<% 	}  %>
-	
-	<% if( resultPage.getEndUnitPage() >= resultPage.getMaxPage() ){ %>
-			이후 ▶
-	<% }else{ %>
-			<a href="javascript:fncGetUserList('<%=resultPage.getEndUnitPage()+1%>')">이후 ▶</a>
-	<% } %>
-	 /////////////////////// EL / JSTL 적용으로 주석 처리 //////////////////////// --%>
-	
+ 
 		<jsp:include page="../common/pageNavigator.jsp"/>	
 			
     	</td>

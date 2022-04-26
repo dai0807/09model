@@ -27,10 +27,7 @@ function fncGetList(currentPage){
 	}
  
  	$(function(){
- 		
- 		//$(".ct_list_pop td:nth-child(3)").on("click", function(){
- 		//	var jtranCode = $(".ct_list_pop td:nth-child(3)").attr("value") ;
-			//console.log("tranCode" + jtranCode ) ; 
+ 	 
 		$(".tranTd").on("click" , function(){
 			 
 			 var JtranCode = $(this).attr("value") ; 

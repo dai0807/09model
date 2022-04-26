@@ -24,19 +24,58 @@
 
 <script type="text/javascript" src="../javascript/calendar.js">
 </script>
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+	
+	
+	function fncAddPurchase(){
+		var receiverName =	$("input[name='receiverName']").val();
+		var receiverPhone=	$("input[name='receiverPhone']").val();
+		var dlvyAddr=		$("input[name='dlvyAddr']").val();
+ 		
+		 console.log( "receiverName  " +receiverName + " , receiverPhone: "+receiverPhone + " ,dlvyAddr: "+ dlvyAddr       );		      
+	
+	
+		if(receiverName == null || receiverName.length<1){
+			alert("구매자이름은 반드시 입력하여야 합니다.");
+			return;
+		}
+		if(receiverPhone == null || receiverPhone.length<1){
+			alert("전화번호 는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if(dlvyAddr == null || dlvyAddr.length<1){
+			alert("배송 주소는 반드시 입력하셔야 합니다.");
+			return;
+		}
+		 
+		
+		
+		
+ 		$("form").attr("method" , "POST").attr("action" , "/purchase/addPurchase?tranCode=002" ).submit();
 
-<script type="text/javascript">
-<!--
-function fncAddPurchase() {
-	document.addPurchase.submit();
-}
--->
+	}
+	
+	$(function(){
+		$(".ct_btn01:contains('구매')").on("click", function(){
+			
+			fncAddPurchase();
+		});
+		
+		$(".ct_btn01:contains('취소')").on("click", function(){
+			history.go(-1); 
+		});
+		
+	}); 
+		 
+	
 </script>
+
 </head>
 
 <body>
 
-<form name="addPurchase" method="post" action="/purchase/addPurchase?tranCode=002">
+<form name="detailForm" >
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -200,7 +239,7 @@ function fncAddPurchase() {
 			<input 	type="text" readonly="readonly" name="dlvyDate" class="ct_input_g" 
 							style="width: 100px; height: 19px" maxLength="20"/>
 			<img 	src="../images/ct_icon_date.gif" width="15" height="15"	
-						onclick="show_calendar('document.addPurchase.dlvyDate', document.addPurchase.dlvyDate.value)"/>
+						onclick="show_calendar('document.detailForm.dlvyDate', document.detailForm.dlvyDate.value)"/>
 		</td>
 	</tr>
 	<tr>
@@ -218,7 +257,8 @@ function fncAddPurchase() {
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:fncAddPurchase();">구매</a>
+						<!--  <a href="javascript:fncAddPurchase();">구매</a>-->
+						구매
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -228,7 +268,8 @@ function fncAddPurchase() {
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:history.go(-1)">취소</a>
+					<!--  	<a href="javascript:history.go(-1)">취소</a>-->
+					취소
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
