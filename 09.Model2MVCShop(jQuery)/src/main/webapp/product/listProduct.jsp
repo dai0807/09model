@@ -47,7 +47,8 @@
 			$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 			$("h7").css("color" , "red");
 			
-			$(".ct_list_pop:nth-child(4n+1)" ).css("background-color" , "whitesmoke");
+ 			$(".ct_list_pop:nth-child(4n+1)" ).css("background-color" , "whitesmoke");
+ 
 		//	$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 			
 			
@@ -266,13 +267,13 @@
 	</tr>
 	<tr>
 	
-</c:forEach>		
 		
 		
 		
 		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
 	</tr>
 
+	</c:forEach>		
 	
 	
 </table>

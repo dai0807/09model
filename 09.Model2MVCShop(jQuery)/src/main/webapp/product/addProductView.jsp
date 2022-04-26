@@ -12,15 +12,23 @@
 
 <script type="text/javascript" src="../javascript/calendar.js">
 </script>
-
-<script type="text/javascript">
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
  
 function fncAddProduct(){
 	//Form 유효성 검증
- 	var name = document.detailForm.prodName.value;
-	var detail = document.detailForm.prodDetail.value;
-	var manuDate = document.detailForm.manuDate.value;
-	var price = document.detailForm.price.value;
+// 	var name = document.detailForm.prodName.value;
+//	var detail = document.detailForm.prodDetail.value;
+//	var manuDate = document.detailForm.manuDate.value;
+//	var price = document.detailForm.price.value;
+
+	var name =	$("input[name='prodName']").val();
+	var detail=	$("input[name='prodDetail']").val();
+	var manuDate=$("input[name='manuDate']").val();
+	var price=	$("input[name='price']").val();
+	
+	 console.log( "name  " +name + " , detail: "+detail + " ,manuDate: "+ manuDate +" , price : "+ price   );		      
+
 
 	if(name == null || name.length<1){
 		alert("상품명은 반드시 입력하여야 합니다.");
@@ -39,20 +47,43 @@ function fncAddProduct(){
 		return;
 	}
 
-	document.detailForm.action='/product/addProduct';
-	document.detailForm.submit();
+//	document.detailForm.action='/product/addProduct';
+//	document.detailForm.submit();
+//			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+	
+	$("form").attr("method" , "POST").attr("action" , "/product/addProduct").submit() ;
 }
 
-function resetData(){
-	document.detailForm.reset();
-}
+
+$(function() {
+		 $( "td.ct_btn01:contains('취소')" ).on("click" , function() {
+				
+				$("form")[0].reset();
+		 
+				 
+		 });
+		  
+		 
+	});
+		 $(function() {
+			 
+			 $( "td.ct_btn01:contains('등록')" ).on("click" , function() {
+				 
+				fncAddProduct();
+			});
+		});	
+		 
+ 
+
+ 
+ 
  
 </script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm" method="post">
+<form name="detailForm"  >
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -160,7 +191,9 @@ function resetData(){
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 				</td>
 				<td background="/images/ct_btnbg02.gif" class="ct_btn01"  style="padding-top: 3px;">
-					<a href="javascript:fncAddProduct();">등록</a>
+				등록
+				<!--  	<a href="javascript:fncAddProduct();">등록</a> -->
+				
 				</td>
 				<td width="14" height="23">
 					<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -170,7 +203,8 @@ function resetData(){
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 				</td>
 				<td background="/images/ct_btnbg02.gif" class="ct_btn01"	 style="padding-top: 3px;">
-					<a href="javascript:resetData();">취소</a>
+				취소
+				<!-- <a href="javascript:resetData();">취소</a>  -->	 
 				</td>
 				<td width="14" height="23">
 					<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
