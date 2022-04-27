@@ -21,13 +21,18 @@ function fncGetList(currentPage){
 	//document.getElementById("currentPage").value = currentPage;
 	$("#currentPage").val(currentPage)
 
+	
+	console.log (  "currentPage 값을 출력 하라! 돌아간다 신난다 "+ $("#currentPage").val());
+
+	
 	//document.detailForm.submit();
-	$("fomr").attr("method" , "POST").attr("action" , "/purchase/listSale").submit();
+	$("form").attr("method" , "POST").attr("action" , "/purchase/listSale").submit();
 		
 	}
  
  	$(function(){
- 	 
+		$(".ct_list_pop:nth-child(4n+2)" ).css("background-color" , "whitesmoke");
+
 		$(".tranTd").on("click" , function(){
 			 
 			 var JtranCode = $(this).attr("value") ; 

@@ -16,19 +16,24 @@
 
 <script type="text/javascript">
 // 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
-<%-- 자바 스크립트 너무 싫습니다. 당신은 저한테 왜 이런 시련을 주시는 것인 지요
-커런트 페이지 들어오고 , 커런트 페이지 id를 가진 태그에 들어가서 id의 "currentPage"에 value으로 놓기 
+<%-- 
 
-
-  --%>
 
 
  
-function fncGetProductList(currentPage){
+function fncGetList(currentPage){
 	document.getElementById("currentPage").value = currentPage;
 	document.detailForm.submit();
 }
+  --%>
+  
+  function fncGetList(currentPage){
+		$("#currentPage").val(currentPage) ; 
+		console.log (  "currentPage 값을 출력 하라! 돌아간다 신난다 "+ " currentPage " + $("#currentPage").val());
+		$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase" ).submit();
 
+	}
+  
 $(function(){
 	
 	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
@@ -36,7 +41,7 @@ $(function(){
 
 	//$("h7").css("color" , "red");
 	
-		$(".ct_list_pop:nth-child(4n+1)" ).css("background-color" , "whitesmoke");
+		$(".ct_list_pop:nth-child(4n+2)" ).css("background-color" , "whitesmoke");
 
 //	$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 	
@@ -96,7 +101,7 @@ $(function(){
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/purchase/listPurchase" method="post">
+<form name="detailForm"  >
  
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>

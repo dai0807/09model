@@ -15,9 +15,11 @@
   
   <frame src="/layout/top.jsp" name="topFrame" scrolling="NO" noresize >
   
-  <frameset rows="*" cols="160,*" framespacing="0" frameborder="NO" border="0">
+  <frameset rows="*" cols="10%,70%,20%" framespacing="0" frameborder="NO" border="0">
     <frame src="/layout/left.jsp" name="leftFrame" scrolling="NO" noresize>
     <frame src="" name="rightFrame"  scrolling="auto">
+      <frame src="/layout/right.jsp"  scrolling="auto">
+    
   </frameset>
 
 </frameset>
