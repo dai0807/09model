@@ -34,6 +34,7 @@
 			console.log (  "메뉴 값을 출력 하라! 돌아간다 신난다 "+ $("#menu" ).val()   + " currentPage " + $("#currentPage").val());
 			//document.detailForm.submit();
 			$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu="+ $("#menu").val()  ).submit();
+			
 		
 		}
 		

@@ -77,6 +77,19 @@
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
+	
+
+	
+	
+	<tr>
+		<td width="104" class="ct_write">상품이름</td>
+		<td bgcolor="D6D6D6" width="1"></td>
+		<td class="ct_write01"> ${purchase.purchaseProd.prodName} </td>
+	</tr>
+	<tr>
+		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
+	</tr>
+	
 	<tr>
 		<td width="104" class="ct_write">
 			구매자아이디 <img	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
@@ -149,17 +162,43 @@
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
-
+ 
 	<tr>
 		<td width="104" class="ct_write">주문일</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01"> ${purchase.orderDate} </td>
 	</tr>
 
+
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
-	
+	<tr>
+		<td width="104" class="ct_write"> 현재 상태 </td>
+		<td bgcolor="D6D6D6" width="1"></td>
+		<td class="ct_write01">  
+
+
+
+		<c:if test="${purchase.tranCode eq '002'}">
+			 구매완료 상태입니다. 
+			 
+	 </c:if>
+	  <c:if test="${purchase.tranCode eq '003'}">
+	 
+		 </c:if>
+	 	 <c:if test="${purchase.tranCode eq '004'}">
+				배송완료 상태입니다.
+	 	 </c:if>
+	 
+	 	 </td>
+	</tr>
+
+
+
+	<tr>
+		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
+	</tr>	
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
